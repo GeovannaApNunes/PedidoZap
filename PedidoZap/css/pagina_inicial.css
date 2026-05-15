@@ -1,0 +1,10 @@
+.text-bold {
+    font-weight: bold;
+}
+.spacing {
+    margin: 60px 60px;
+}
+.bg-products {
+    background-color: #D9D9D9;
+    max-width: 287px;
+}
