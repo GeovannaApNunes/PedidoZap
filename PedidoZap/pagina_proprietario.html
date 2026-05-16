@@ -9,9 +9,42 @@
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/pagina_proprietario.css">
 </head>
 
 <body>
+
+    <h1>Olá, Proprietário!</h1>
+
+    <h4>Seus produtos: </h4>
+
+
+    <div>
+        <div class="row row-cols-1 row-cols-md-3 g-4 spacing cards">
+            <div class="col">
+                <div class="card bg-products">
+                    <img src="img/batatafrita.jpeg" class="card-img-top" alt="batata frita">
+                    <div class="card-body">
+                        <h5 class="card-title">Batata Frita</h5>
+                        <p class="card-text">Breve descrição dos ingredientes</p>
+                        <p class="card-text">12,50 R$</p>
+                        <button type="button" class="btn btn-success btn-laranja">Editar</button>
+                        <button type="button" class="btn btn-success btn-vermelha">Excluir</button>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col">
+                <div class="card bg-products">
+                    <i class="bi bi-plus plus"></i>
+                    <div class="card-body">
+                         <h5 class="card-title">Adicionar</h5>
+                        <button type="button" class="btn btn-success btn-verde">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+    </div>
     <footer>
         <p class="text-center">© 2026 PedidoZap. Todos os direitos reservados.</p>
     </footer>
