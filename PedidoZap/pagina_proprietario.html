@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Proprietario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
+    <title>Página Proprietário</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/pagina_proprietario.css">
 </head>
@@ -16,41 +16,179 @@
 
     <h1>Olá, Proprietário!</h1>
 
-    <h4>Seus produtos: </h4>
+    <h4 class="px-4">
+        Seus produtos:
+    </h4>
 
 
-    <div>
-        <div class="row row-cols-1 row-cols-md-3 g-4 spacing cards">
-            <div class="col">
-                <div class="card bg-products">
-                    <img src="img/batatafrita.jpeg" class="card-img-top" alt="batata frita">
-                    <div class="card-body">
-                        <h5 class="card-title">Batata Frita</h5>
-                        <p class="card-text">Breve descrição dos ingredientes</p>
-                        <p class="card-text">12,50 R$</p>
-                        <button type="button" class="btn btn-success btn-laranja">Editar</button>
-                        <button type="button" class="btn btn-success btn-vermelha">Excluir</button>
-                    </div>
+
+    <!-- CARDS -->
+    <div id="cards-produtos" class="row row-cols-1 row-cols-md-3 g-4 cards">
+
+
+
+        <!-- CARD FIXO -->
+        <div class="col">
+
+            <div class="card bg-products card-adicionar">
+
+                <i class="bi bi-plus plus"></i>
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        Adicionar
+                    </h5>
+
+                    <button type="button" class="btn btn-success btn-verde" onclick="abrirModal()">
+
+                        Adicionar
+
+                    </button>
+
                 </div>
+
             </div>
-    
-            <div class="col">
-                <div class="card bg-products">
-                    <i class="bi bi-plus plus"></i>
-                    <div class="card-body">
-                         <h5 class="card-title">Adicionar</h5>
-                        <button type="button" class="btn btn-success btn-verde">Adicionar</button>
-                    </div>
-                </div>
-            </div>
+
+        </div>
 
     </div>
+
+
+
+    <!-- MODAL -->
+    <div class="modal fade" id="modalProduto" tabindex="-1">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <!-- TOPO -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+
+                    <h5 class="modal-title">
+                        Adicionar Produto
+                    </h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+
+                </div>
+
+
+
+                <!-- IMAGEM -->
+                <div class="d-flex align-items-center gap-3 mb-3">
+
+                    <img id="preview" src="img/Vector.png">
+
+                    <div>
+
+                        <label class="btn-upload">
+
+                            <i class="bi bi-upload"></i>
+                            Carregar Imagem
+
+                            <input type="file" id="imagemInput" hidden>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- NOME -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Nome do produto
+                    </label>
+
+                    <input type="text" id="nome" class="form-control" placeholder="Ex: X-Burger">
+
+                </div>
+
+
+
+                <!-- DESCRIÇÃO -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Descrição
+                    </label>
+
+                    <textarea id="descricao" class="form-control"
+                        placeholder="Digite a descrição do produto..."></textarea>
+
+                </div>
+
+
+
+                <!-- LINHA -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Preço (R$)
+                        </label>
+
+                        <input type="number" id="preco" class="form-control" placeholder="Ex: 25.90">
+
+                    </div>
+
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Categoria
+                        </label>
+
+                        <select id="categoria" class="form-select">
+
+                            <option>Pizza</option>
+                            <option>Hambúrguer</option>
+                            <option>Salgados</option>
+                            <option>Bebidas</option>
+                            <option>Porções</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOTÃO -->
+                <button class="btn btn-salvar w-100" onclick="salvarProduto()">
+
+                    Salvar Produto
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
     <footer>
-        <p class="text-center">© 2026 PedidoZap. Todos os direitos reservados.</p>
+        <p class="text-center">
+            © 2026 PedidoZap. Todos os direitos reservados.
+        </p>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/pagina_proprietario.js"></script>
+
 </body>
 
 </html>
