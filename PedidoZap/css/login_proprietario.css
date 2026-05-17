@@ -7,7 +7,7 @@ body {
     background-image:
         linear-gradient(rgba(217, 217, 217, 0.5),
             rgba(224, 223, 223, 0.5)),
-        url("/PedidoZap-main/PedidoZap/img/bg-hamburger.jpeg");
+        url("../img/bg-hamburger.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -46,14 +46,12 @@ form .mb-3 {
     border: 2px solid #000000;
 }
 
-.form-check {
-    text-align: center;
-    padding: 0 10px;
-}
 
-.form-check a {
+.mb-3 a {
     color: #000000;
-    text-decoration: underline;
+    text-decoration: underline !important;
+    justify-content: center !important;
+    display: flex !important;
 }
 
 form .btn {
@@ -73,7 +71,7 @@ form .btn:hover {
 
 footer {
     text-align: center;
-    margin-top: 240px;
+    margin-top: 500px;
     position: static;
     background-color: #E0DFDF;
     padding: 10px;

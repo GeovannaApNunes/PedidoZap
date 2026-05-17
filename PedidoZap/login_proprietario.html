@@ -3,37 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Proprietario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <title>Login Proprietário</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/login_proprietario.css">
-    <link rel="stylesheet" href="/PedidoZap-main/PedidoZap/css/login_proprietario.css">
+
 </head>
 
 <body>
+    <!-- LOGIN -->
+    <form id="loginForm">
 
-    <div class="logo">
-        <img src="img/logosemfundo.png" alt="Logo">
-    </div>
-    <form>
+        <h3 class="text-center mb-4">
+            Login Proprietário
+        </h3>
+
+        <!-- EMAIL -->
         <div class="mb-3">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Usuario">
+            <input type="email" class="form-control" id="email" placeholder="Email" required>
         </div>
+
+        <!-- SENHA -->
         <div class="mb-3">
-            <input type="password" class="form-control" id="exampleInputPassword1"  placeholder="Senha">
+            <input type="password" class="form-control" id="senha" placeholder="Senha" required>
         </div>
-        <div class="mb-3 form-check">
-            <a href="">Esqueci minha senha</a>
+
+        <!-- ESQUECI SENHA -->
+        <div class="mb-3">
+            <a href="#" id="resetSenha" style="text-decoration:none;">
+
+                Esqueci minha senha
+
+            </a>
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
+
+        <!-- BOTÃO -->
+        <button type="submit" class="btn btn-primary w-100">
+
+            Entrar
+
+        </button>
     </form>
 
-
     <footer>
-        <p>&copy; 2026 PedidoZap. Todos os direitos reservados. </p>
+
+        <p>
+            &copy; 2026 PedidoZap.
+            Todos os direitos reservados.
+        </p>
+
     </footer>
 
-</body>
+    <script type="module" src="js/login_proprietario.js"></script>
 
+</body>
 </html>
