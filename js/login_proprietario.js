@@ -1,6 +1,6 @@
 // FIREBASE
 import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+from "";
 
 import {
 
@@ -15,24 +15,24 @@ import {
     signOut
 
 }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+from "";
 
 
 
 // CONFIG FIREBASE
 const firebaseConfig = {
 
-    apiKey: "AIzaSyDpFsJDr8La7ugDlJLgmPaZcc9v5S4iGxo",
+    apiKey: "",
 
-    authDomain: "pedidozap-1def3.firebaseapp.com",
+    authDomain: "",
 
-    projectId: "pedidozap-1def3",
+    projectId: "",
 
-    storageBucket: "pedidozap-1def3.firebasestorage.app",
+    storageBucket: "",
 
-    messagingSenderId: "437693168832",
+    messagingSenderId: "",
 
-    appId: "1:437693168832:web:073d14fc1a4e5535018125"
+    appId: ""
 
 };
 
