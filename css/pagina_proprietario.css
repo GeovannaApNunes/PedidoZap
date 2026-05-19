@@ -1,0 +1,185 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #343a40;
+    text-align: left;
+    padding: 20px;
+    margin-top: 20px;
+    text-decoration: underline;
+}
+
+h4 {
+    color: #343a40;
+    text-align: left;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.cards {
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    background-color: #D9D9D9;
+}
+
+.card-img-top {
+    border-radius: 30px;
+}
+
+.btn-laranja {
+    background-color: #E68B2F;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-vermelha {
+    background-color: #B10000;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.btn-laranja:hover {
+    background-color: #FF8C00;
+}
+
+.btn-vermelha:hover {
+    background-color: #C82333;
+}
+
+.btn-verde {
+    background-color: #11CE27;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 50px;
+    margin: 20px auto;
+    color: white;
+    background-color: #000;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-verde:hover {
+    background-color: #28a745;
+}
+
+footer {
+    text-align: center;
+    margin-top: 240px;
+    position: static;
+    background-color: #E0DFDF;
+    padding: 10px;
+}
+
+footer p {
+    color: #000000;
+    font-size: 24px;
+}
+
+/* MODAL */
+
+.modal-dialog {
+    max-width: 520px;
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    padding: 10px;
+}
+
+.modal-title {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.btn-close {
+    transform: scale(.8);
+}
+
+.form-control,
+.form-select {
+    height: 40px;
+    font-size: 14px;
+}
+
+textarea.form-control {
+    height: 90px !important;
+    resize: none;
+}
+
+.form-label {
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+#preview {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+.btn-upload {
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 14px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+.btn-salvar {
+    background: #198754;
+    border: none;
+    height: 42px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+     color: #E0DFDF;
+}
+
+.btn-salvar:hover {
+    background: #28a745;
+    color: #fff;
+}
