@@ -20,7 +20,7 @@ const firebaseConfig = {
 
     apiKey: "",
 
-    authDomain: ""
+    authDomain: "",
 
     projectId: "",
 
