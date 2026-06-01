@@ -1,42 +1,23 @@
-// FIREBASE
 import { initializeApp }
 from "";
 
 import {
-
     getAuth,
-
     signInWithEmailAndPassword,
-
     sendPasswordResetEmail,
-
     onAuthStateChanged,
-
     signOut
-
 }
 from "";
 
-
-
-// CONFIG FIREBASE
 const firebaseConfig = {
-
     apiKey: "",
-
     authDomain: "",
-
     projectId: "",
-
     storageBucket: "",
-
     messagingSenderId: "",
-
     appId: ""
-
 };
-
-
 
 // INICIA FIREBASE
 const app =
@@ -44,10 +25,6 @@ const app =
 
 const auth =
     getAuth(app);
-
-
-
-
 
 // LOGIN
 const loginForm =
@@ -62,7 +39,6 @@ if(loginForm){
         async (e) => {
 
         e.preventDefault();
-
 
 
         // CAMPOS

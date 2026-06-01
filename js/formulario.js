@@ -1,182 +1,125 @@
-        // LISTA
-        const listaPedido =
-            document.getElementById("lista-pedido");
+const carrinho =
+    JSON.parse(localStorage.getItem("carrinho")) || [];
 
-        // TOTAL
-        const totalPedido =
-            document.getElementById("total-pedido");
+// TROCO
+const pagamentoInputs =
+    document.querySelectorAll('input[name="pagamento"]');
 
-        // QUANTIDADE
-        const quantidadeItens =
-            document.getElementById("quantidade-itens");
+const campoTroco =
+    document.getElementById("campoTroco");
 
-        // PEGA CARRINHO
-        const carrinho =
-            JSON.parse(localStorage.getItem("carrinho")) || [];
+pagamentoInputs.forEach((input) => {
 
-        // TOTAL
-        let total = 0;
+    input.addEventListener("change", () => {
 
-        // RENDERIZA
-        function renderPedido() {
-
-            listaPedido.innerHTML = "";
-
-            if (carrinho.length === 0) {
-
-                listaPedido.innerHTML = `
-                
-                    <div class="text-center py-4">
-
-                        <i class="bi bi-cart-x fs-1 text-muted"></i>
-
-                        <p class="mt-3">
-                            Nenhum item no pedido
-                        </p>
-
-                    </div>
-                
-                `;
-
-                return;
-
-            }
-
-            carrinho.forEach((produto) => {
-
-                total += Number(produto.preco);
-
-                listaPedido.innerHTML += `
-
-                    <div class="
-                        d-flex
-                        align-items-center
-                        justify-content-between
-                        bg-light
-                        rounded
-                        p-3
-                        mb-3
-                    ">
-
-                        <div class="d-flex align-items-center">
-
-                            <img
-                                src="${produto.imagem}"
-                                alt="${produto.nome}"
-                                style="
-                                    width: 90px;
-                                    height: 90px;
-                                    object-fit: cover;
-                                    border-radius: 10px;
-                                "
-                            >
-
-                            <div class="ms-3">
-
-                                <h6 class="fw-bold mb-1">
-                                    ${produto.nome}
-                                </h6>
-
-                                <small class="text-muted">
-                                    ${produto.categoria}
-                                </small>
-
-                            </div>
-
-                        </div>
-
-                        <strong>
-                            R$ ${Number(produto.preco).toFixed(2)}
-                        </strong>
-
-                    </div>
-
-                `;
-
-            });
-
-            quantidadeItens.innerText =
-                `${carrinho.length} itens`;
-
-            totalPedido.innerHTML =
-                `Total: R$ ${total.toFixed(2)}`;
-
+        if (input.value === "avista" && input.checked) {
+            campoTroco.style.display = "block";
+        } else {
+            campoTroco.style.display = "none";
         }
 
-        // FINALIZAR
-        function finalizarPedido() {
+    });
 
-            const nome =
-                document.getElementById("nome").value;
+});
 
-            const cep =
-                document.getElementById("cep").value;
 
-            const telefone =
-                document.getElementById("telefone").value;
+// FINALIZAR
+function finalizarPedido() {
 
-            const endereco =
-                document.getElementById("endereco").value;
+    if (carrinho.length === 0) {
+        alert("Carrinho vazio!");
+        return;
+    }
 
-            const pagamento =
-                document.querySelector(
-                    'input[name="pagamento"]:checked'
-                );
+    const nome =
+        document.getElementById("nome").value || "Não informado";
 
-            if (
-                nome === "" ||
-                cep === "" ||
-                telefone === "" ||
-                endereco === "" ||
-                !pagamento
-            ) {
+    const cep =
+        document.getElementById("cep").value || "Não informado";
 
-                alert(
-                    "Preencha todas as informações."
-                );
+    const telefone =
+        document.getElementById("telefone").value || "Não informado";
 
-                return;
+    const endereco =
+        document.getElementById("endereco").value || "Não informado";
 
-            }
+    const troco =
+        document.getElementById("troco")?.value || "";
 
-            alert("Pedido realizado com sucesso!");
+    const pagamentoSelecionado =
+        document.querySelector('input[name="pagamento"]:checked');
 
-            localStorage.removeItem("carrinho");
+    if (!pagamentoSelecionado) {
+        alert("Escolha o pagamento");
+        return;
+    }
 
-            window.location.href =
-                "pagina_inicial.html";
+    const data =
+        new Date().toLocaleString("pt-BR");
 
+    let total = 0;
+
+    carrinho.forEach(p => {
+        total += Number(p.preco);
+    });
+
+    const pedidoFinalizado = {
+        data,
+        itens: carrinho,
+        total,
+        cliente: {
+            nome,
+            cep,
+            telefone,
+            endereco,
+            pagamento: pagamentoSelecionado.value,
+            troco: troco || null
         }
+    };
 
-        // INICIA
-        renderPedido();
+    // 🔥 SALVA
+    localStorage.setItem(
+        "pedidoFinalizado",
+        JSON.stringify(pedidoFinalizado)
+    );
 
-    </script>
+    // limpa carrinho
+    localStorage.removeItem("carrinho");
 
-    <script>
+    // vai pra página pedido
+    window.location.href = "pedido.html";
+}
 
-        const pagamentoInputs =
-            document.querySelectorAll(
-                'input[name="pagamento"]'
-            );
 
-        const campoTroco =
-            document.getElementById("campoTroco");
+// render do carrinho
+function renderPedido() {
 
-        pagamentoInputs.forEach((input) => {
+    const lista = document.getElementById("lista-pedido");
+    const totalPedido = document.getElementById("total-pedido");
+    const quantidadeItens = document.getElementById("quantidade-itens");
 
-            input.addEventListener("change", () => {
+    lista.innerHTML = "";
 
-                if (input.value === "avista" && input.checked) {
+    let total = 0;
 
-                    campoTroco.style.display = "block";
+    if (carrinho.length === 0) {
+        lista.innerHTML = "<p>Nenhum item</p>";
+        return;
+    }
 
-                } else {
+    carrinho.forEach((p) => {
 
-                    campoTroco.style.display = "none";
+        total += Number(p.preco);
 
-                }
+        lista.innerHTML += `
+            <div>
+                ${p.nome} - R$ ${Number(p.preco).toFixed(2)}
+            </div>
+        `;
+    });
 
-            });
+    quantidadeItens.innerText = carrinho.length + " itens";
+    totalPedido.innerText = "Total: R$ " + total.toFixed(2);
+}
 
-        });
+renderPedido();

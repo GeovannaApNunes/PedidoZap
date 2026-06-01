@@ -1,23 +1,21 @@
-        // CONTAINER
-        const container = document.getElementById("carrinho-container");
+// CONTAINER
+const container = document.getElementById("carrinho-container");
 
-        // TOTAL
-        const itemCount = document.getElementById("item-count");
-        const totalElement = document.getElementById("total");
+// TOTAL
+const itemCount = document.getElementById("item-count");
+const totalElement = document.getElementById("total");
 
-        // PEGA CARRINHO
-        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+// PEGA CARRINHO
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-        // RENDERIZA
-        function renderCarrinho() {
+// RENDERIZA
+function renderCarrinho() {
+  container.innerHTML = "";
 
-            container.innerHTML = "";
+  let total = 0;
 
-            let total = 0;
-
-            if (carrinho.length === 0) {
-
-                container.innerHTML = `
+  if (carrinho.length === 0) {
+    container.innerHTML = `
                 
                     <div class="text-center py-5">
 
@@ -30,14 +28,12 @@
                     </div>
                 
                 `;
+  }
 
-            }
+  carrinho.forEach((produto, index) => {
+    total += Number(produto.preco);
 
-            carrinho.forEach((produto, index) => {
-
-                total += Number(produto.preco);
-
-                container.innerHTML += `
+    container.innerHTML += `
 
                     <div class="cart-item d-flex align-items-center mb-3 bg-white shadow-sm rounded p-2">
 
@@ -80,46 +76,36 @@
                     </div>
 
                 `;
+  });
 
-            });
+  itemCount.innerText = `${carrinho.length} itens selecionados`;
 
-            itemCount.innerText = `${carrinho.length} itens selecionados`;
-
-            totalElement.innerHTML = `
+  totalElement.innerHTML = `
             
                 <strong>
                     Total: R$ ${total.toFixed(2)}
                 </strong>
             
             `;
+}
 
-        }
+// REMOVE ITEM
+function removerItem(index) {
+  carrinho.splice(index, 1);
 
-        // REMOVE ITEM
-        function removerItem(index) {
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-            carrinho.splice(index, 1);
+  renderCarrinho();
+}
 
-            localStorage.setItem(
-                "carrinho",
-                JSON.stringify(carrinho)
-            );
+// REMOVE TODOS
+function removeAll() {
+  carrinho = [];
 
-            renderCarrinho();
+  localStorage.removeItem("carrinho");
 
-        }
+  renderCarrinho();
+}
 
-        // REMOVE TODOS
-        function removeAll() {
-
-            carrinho = [];
-
-            localStorage.removeItem("carrinho");
-
-            renderCarrinho();
-
-        }
-
-        // INICIA
-        renderCarrinho();
-
+// INICIA
+renderCarrinho();

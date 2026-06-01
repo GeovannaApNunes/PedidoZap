@@ -1,235 +1,170 @@
-// LISTA
-const listaPedido =
-    document.getElementById("lista-pedido");
+function carregarPedido() {
 
-// TOTAL
-const totalPedido =
-    document.getElementById("total-pedido");
+    const pedido =
+        JSON.parse(localStorage.getItem("pedidoFinalizado"));
 
-// QUANTIDADE
-const quantidadeItens =
-    document.getElementById("quantidade-itens");
+    const box =
+        document.getElementById("mensagemPedido");
 
-// TROCO
-const pagamentoInputs =
-    document.querySelectorAll(
-        'input[name="pagamento"]'
+    if (!pedido) {
+        box.innerText = "Nenhum pedido encontrado.";
+        return;
+    }
+
+    let texto = `
+PEDIDO PEDIDOZAP
+Data: ${pedido.data}
+
+ITENS DO PEDIDO
+`;
+
+    pedido.itens.forEach((item, i) => {
+        texto += `${i + 1}. ${item.nome} - R$ ${Number(item.preco).toFixed(2)}\n`;
+    });
+
+    texto += `
+---------------------------
+TOTAL: R$ ${Number(pedido.total).toFixed(2)}
+---------------------------
+
+DADOS DO CLIENTE
+
+Nome: ${pedido.cliente.nome}
+CEP: ${pedido.cliente.cep}
+Telefone: ${pedido.cliente.telefone}
+Endereço: ${pedido.cliente.endereco}
+Pagamento: ${pedido.cliente.pagamento}
+`;
+
+    if (pedido.cliente.troco) {
+        texto += `Troco: R$ ${pedido.cliente.troco}\n`;
+    }
+
+    box.innerText = texto;
+}
+
+
+// COPIAR
+function copiarPedido() {
+
+    navigator.clipboard.writeText(
+        document.getElementById("mensagemPedido").innerText
     );
 
-const campoTroco =
-    document.getElementById("campoTroco");
+    alert("Copiado!");
+}
 
-// CARRINHO
-const carrinho =
-    JSON.parse(localStorage.getItem("carrinho")) || [];
 
-// TOTAL
-let total = 0;
+function enviarWhats() {
 
-// MOSTRA TROCO
-pagamentoInputs.forEach((input) => {
+    const texto =
+        document.getElementById("mensagemPedido").innerText;
 
-    input.addEventListener("change", () => {
+    const numero = "";
 
-        if (
-            input.value === "avista" &&
-            input.checked
-        ) {
+    // abre WhatsApp
+    window.open(
+        `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`,
+        "_blank"
+    );
 
-            campoTroco.style.display = "block";
+    // volta pro início depois de um tempo
+    setTimeout(() => {
 
-        } else {
+        // limpa dados do pedido (opcional)
+        localStorage.removeItem("pedidoFinalizado");
+        localStorage.removeItem("carrinho");
 
-            campoTroco.style.display = "none";
+        // volta pra home
+        window.location.href = "pagina_inicial.html";
 
-        }
+    }, 3000); // 3 segundos
+}
+
+window.onload = carregarPedido;
+
+let notaSelecionada = 0;
+
+
+// ESTRELAS
+const estrelas =
+    document.querySelectorAll(".estrela");
+
+const textoNota =
+    document.getElementById("notaTexto");
+
+estrelas.forEach((estrela) => {
+
+    estrela.addEventListener("click", () => {
+
+        notaSelecionada =
+            Number(estrela.getAttribute("data-nota"));
+
+        atualizarEstrelas();
+
+        textoNota.innerText =
+            `Nota: ${notaSelecionada} estrela(s)`;
 
     });
 
 });
 
-// RENDERIZA PEDIDO
-function renderPedido() {
 
-    listaPedido.innerHTML = "";
+function atualizarEstrelas() {
 
-    total = 0;
+    estrelas.forEach((estrela) => {
 
-    carrinho.forEach((produto) => {
+        const valor =
+            Number(estrela.getAttribute("data-nota"));
 
-        total += Number(produto.preco);
-
-        listaPedido.innerHTML += `
-
-            <div class="item-pedido">
-
-                <div class="item-info">
-
-                    <img
-                        src="${produto.imagem}"
-                        alt="${produto.nome}"
-                    >
-
-                    <div>
-
-                        <div class="item-nome">
-                            ${produto.nome}
-                        </div>
-
-                        <small>
-                            ${produto.categoria}
-                        </small>
-
-                    </div>
-
-                </div>
-
-                <strong>
-                    R$ ${Number(produto.preco).toFixed(2)}
-                </strong>
-
-            </div>
-
-        `;
+        if (valor <= notaSelecionada) {
+            estrela.classList.remove("bi-star");
+            estrela.classList.add("bi-star-fill");
+            estrela.style.color = "#ffc107";
+        } else {
+            estrela.classList.remove("bi-star-fill");
+            estrela.classList.add("bi-star");
+            estrela.style.color = "#000";
+        }
 
     });
-
-    quantidadeItens.innerText =
-        `${carrinho.length} itens`;
-
-    totalPedido.innerHTML =
-        `Total: R$ ${total.toFixed(2)}`;
 
 }
 
-// FINALIZAR
-function finalizarPedido() {
 
-    const nome =
-        document.getElementById("nome").value ||
-        "Não informado";
+// ENVIAR FEEDBACK
+function enviarFeedback() {
 
-    const cep =
-        document.getElementById("cep").value ||
-        "Não informado";
+    const comentario =
+        document.getElementById("comentario").value;
 
-    const telefone =
-        document.getElementById("telefone").value ||
-        "Não informado";
-
-    const endereco =
-        document.getElementById("endereco").value ||
-        "Não informado";
-
-    const troco =
-        document.getElementById("troco").value;
-
-    const pagamentoSelecionado =
-        document.querySelector(
-            'input[name="pagamento"]:checked'
-        );
-
-    if (!pagamentoSelecionado) {
-
-        alert(
-            "Escolha um método de pagamento."
-        );
-
+    if (notaSelecionada === 0) {
+        alert("Escolha uma nota!");
         return;
-
     }
 
-    let pagamento =
-        pagamentoSelecionado.value;
+    const feedback = {
+        nota: notaSelecionada,
+        comentario: comentario || "",
+        data: new Date().toLocaleString("pt-BR")
+    };
 
-    if (pagamento === "pix") {
-        pagamento = "Pix";
-    }
+    // pega lista antiga ou cria nova
+    let lista =
+        JSON.parse(localStorage.getItem("feedbacks")) || [];
 
-    if (pagamento === "cartao") {
-        pagamento = "Cartão";
-    }
+    lista.push(feedback);
 
-    if (pagamento === "avista") {
-        pagamento = "Dinheiro";
-    }
-
-    // DATA
-    const data =
-        new Date().toLocaleString("pt-BR");
-
-    // ITENS
-    let itensTexto = "";
-
-    carrinho.forEach((produto, index) => {
-
-        itensTexto +=
-`${index + 1}. ${produto.nome} - R$ ${Number(produto.preco).toFixed(2)}
-`;
-
-    });
-
-    // MENSAGEM
-    let mensagem =
-
-`PEDIDO PEDIDOZAP
-
-Data: ${data}
-
-ITENS DO PEDIDO
-${itensTexto}
-
------------------------------
-TOTAL: R$ ${total.toFixed(2)}
------------------------------
-
-DADOS DO CLIENTE
-Nome: ${nome}
-CEP: ${cep}
-Telefone: ${telefone}
-Endereço: ${endereco}
-Pagamento: ${pagamento}
-`;
-
-    if (
-        pagamentoSelecionado.value === "avista" &&
-        troco !== ""
-    ) {
-
-        mensagem +=
-`Troco para: R$ ${troco}
-`;
-
-    }
-
-    mensagem += `
-
-copiar - enviar para whatsapp
-
-deixe seu feedback!
-`;
-
-    // COPIA
-    navigator.clipboard.writeText(mensagem);
-
-    // WHATSAPP
-    const numero =
-        "5534999999999";
-
-    const url =
-`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-
-    // ABRE
-    window.open(url, "_blank");
-
-    alert(
-        "Pedido copiado e enviado!"
+    localStorage.setItem(
+        "feedbacks",
+        JSON.stringify(lista)
     );
 
-    // LIMPA
-    localStorage.removeItem("carrinho");
+    alert("Feedback enviado! Obrigado ❤️");
 
+    // limpa modal
+    document.getElementById("comentario").value = "";
+    notaSelecionada = 0;
+    atualizarEstrelas();
+    textoNota.innerText = "Nenhuma nota selecionada";
 }
-
-// INICIA
-renderPedido();

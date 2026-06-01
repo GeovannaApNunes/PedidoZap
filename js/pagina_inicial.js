@@ -1,80 +1,115 @@
-// PEGA PRODUTOS SALVOS
-const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
+const DB_KEY = "pedidozap_db";
 
+// ================================
+// BANCO LOCAL (JSON ÚNICO)
+// ================================
+function getDB() {
+    return JSON.parse(localStorage.getItem(DB_KEY)) || {
+        produtos: [],
+        pedidos: [],
+        feedbacks: []
+    };
+}
+
+// ================================
 // CONTAINER
-const listaProdutos = document.getElementById("lista-produtos");
+// ================================
+const listaProdutos =
+    document.getElementById("lista-produtos");
 
-// RENDERIZA PRODUTOS
+// ================================
+// RENDER PRODUTOS
+// ================================
 function renderizarProdutos() {
-  listaProdutos.innerHTML = "";
 
-  produtos.forEach((produto) => {
-    listaProdutos.innerHTML += `
+    const db = getDB();
+    const produtos = db.produtos;
 
-      <div class="col">
+    listaProdutos.innerHTML = "";
 
-        <div class="card bg-products h-100 shadow-sm">
+    if (!produtos.length) {
 
-          <img 
-            src="${produto.imagem}"
-            class="card-img-top"
-            alt="${produto.nome}"
-            style="
-              height: 250px;
-              object-fit: cover;
-            "
-          >
+        listaProdutos.innerHTML = `
+            <div class="text-center w-100 py-5">
+                <i class="bi bi-box-seam fs-1 text-muted"></i>
+                <p class="mt-3">Nenhum produto cadastrado ainda</p>
+            </div>
+        `;
+        return;
+    }
 
-          <div class="card-body d-flex flex-column">
+    produtos.forEach((produto) => {
 
-            <h5 class="card-title">
-              ${produto.nome}
-            </h5>
+        listaProdutos.innerHTML += `
+        
+        <div class="col">
 
-            <p class="card-text">
-              ${produto.descricao}
-            </p>
+            <div class="card bg-products h-100 shadow-sm">
 
-            <p class="fw-bold fs-5">
-              R$ ${Number(produto.preco).toFixed(2)}
-            </p>
+                <img 
+                    src="${produto.imagem}"
+                    class="card-img-top"
+                    alt="${produto.nome}"
+                    style="height: 250px; object-fit: cover;"
+                >
 
-            <p class="text-muted">
-              ${produto.categoria}
-            </p>
+                <div class="card-body d-flex flex-column">
 
-            <button 
-              class="btn btn-success w-100 mt-auto"
-              onclick='adicionarCarrinho(${JSON.stringify(produto)})'
-            >
-              Adicionar ao Carrinho
-            </button>
+                    <h5 class="card-title">
+                        ${produto.nome}
+                    </h5>
 
-          </div>
+                    <p class="card-text">
+                        ${produto.descricao}
+                    </p>
+
+                    <p class="fw-bold fs-5">
+                        R$ ${Number(produto.preco).toFixed(2)}
+                    </p>
+
+                    <p class="text-muted">
+                        ${produto.categoria}
+                    </p>
+
+                    <button 
+                        class="btn btn-success w-100 mt-auto"
+                        onclick='adicionarCarrinho(${JSON.stringify(produto)})'
+                    >
+                        Adicionar ao Carrinho
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
-
-      </div>
-
-    `;
-  });
+        
+        `;
+    });
 }
 
-// ADICIONAR AO CARRINHO
+
+// ================================
+// CARRINHO
+// ================================
 function adicionarCarrinho(produto) {
 
-  // PEGA CARRINHO
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let carrinho =
+        JSON.parse(localStorage.getItem("carrinho")) || [];
 
-  // ADICIONA PRODUTO
-  carrinho.push(produto);
+    carrinho.push(produto);
 
-  // SALVA
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
 
-  // ALERTA
-  alert(`${produto.nome} adicionado ao carrinho!`);
+    alert(`${produto.nome} adicionado ao carrinho!`);
 }
 
+
+
+// ================================
 // INICIA
+// ================================
 renderizarProdutos();
