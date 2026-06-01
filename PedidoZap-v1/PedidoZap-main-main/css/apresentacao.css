@@ -1,0 +1,126 @@
+.hero-banner {
+    background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('../img/bg-hamburger.jpeg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding-bottom: 80px;
+}
+
+.hero-topbar {
+    position: relative;
+    z-index: 2;
+    padding: 20px 0;
+}
+
+.hero-buttons-top {
+    display: flex;
+    gap: 10px;
+}
+
+.hero-logo {
+    height: 50px;
+    width: 55px;
+}
+
+.hero-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 120px 0 60px;
+    max-width: 650px;
+}
+
+.hero-label {
+    display: inline-block;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+    gap: 1rem;
+}
+
+.hero-actions .btn {
+    min-width: 180px;
+}
+
+.hero-description {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    max-width: 560px;
+}
+
+.hero-buttons .btn {
+    min-width: 180px;
+}
+
+.benefits-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.benefits-list li {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.benefits-list i {
+    margin-right: 10px;
+    color: #198754;
+}
+
+.feature-card {
+    background-color: #fff;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    color: #198754;
+    margin-bottom: 1rem;
+}
+
+.footer {
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 80px 0 40px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+
+    .hero-topbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .hero-buttons-top {
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

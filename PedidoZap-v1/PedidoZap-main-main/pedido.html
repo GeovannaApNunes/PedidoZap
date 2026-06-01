@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/pedido.css">
+</head>
+
+<body>
+    <div class="page-bg d-flex align-items-center justify-content-center min-vh-100 py-5">
+        <div class="card-pedido">
+            <h2 class="titulo-pedido">
+                Precisamos de apenas algumas informações.
+            </h2>
+
+            <!-- PEDIDO -->
+            <div class="pedido-box">
+                <h4 class="fw-bold mb-3">
+                    Seu Pedido
+                </h4>
+                <div id="lista-pedido"></div>
+                <div class="pedido-total">
+                    <span id="quantidade-itens">
+                        0 itens
+                    </span>
+                    <strong id="total-pedido">
+                        Total: R$ 0,00
+                    </strong>
+                </div>
+            </div>
+
+            <!-- FORM -->
+            <div class="campo-grupo">
+                <label class="campo-label">
+                    Nome:
+                </label>
+                <input type="text" id="nome" class="campo-input">
+            </div>
+
+            <div class="campo-grupo">
+                <label class="campo-label">
+                    CEP:
+                </label>
+                <input type="tel" id="cep" class="campo-input" maxlength="9" placeholder="00000-000" inputmode="numeric"
+                    pattern="[0-9]*" autocomplete="postal-code" onblur="buscarEndereco()">
+                <small id="cep-status"></small>
+            </div>
+
+            <div class="campo-grupo">
+
+                <label class="campo-label" for="telefone">
+                    Telefone:
+                </label>
+
+                <input type="tel" id="telefone" class="campo-input" placeholder="(34) 99999-9999" inputmode="numeric"
+                    maxlength="15">
+
+            </div>
+
+
+            <div class="campo-grupo row gx-2 gy-2 align-items-end">
+                <div class="col-12 col-md-6">
+                    <label class="campo-label" for="endereco">Rua:</label>
+                    <input type="text" id="endereco" class="campo-input" placeholder="Rua">
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="campo-label" for="numero">Nº:</label>
+                    <input type="text" id="numero" class="campo-input" placeholder="Número">
+                </div>
+                <div class="col-6 col-md-4">
+                    <label class="campo-label" for="complemento">Complemento:</label>
+                    <input type="text" id="complemento" class="campo-input" placeholder="Apto, bloco, etc">
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <label class="campo-label">
+                    Bairro:
+                </label>
+                <input type="text" id="bairro" class="campo-input" readonly>
+            </div>
+           
+
+            <!-- PAGAMENTO -->
+            <p class="pagamento-titulo">
+                Método de pagamento:
+            </p>
+            <div class="pagamento-opcoes">
+                <label class="pagamento-opcao">
+                    <input type="radio" name="pagamento" value="pix">
+                    <i class="bi bi-patch-check-fill icon-pix"></i>
+
+                    Pix
+
+                </label>
+                <label class="pagamento-opcao">
+                    <input type="radio" name="pagamento" value="cartao">
+                    <i class="bi bi-credit-card-fill icon-cartao"></i>
+
+                    Cartão de Crédito
+
+                </label>
+                <label class="pagamento-opcao">
+                    <input type="radio" name="pagamento" value="avista">
+                    <i class="bi bi-cash-coin icon-avista"></i>
+
+                    À vista
+                </label>
+
+                <div id="campoTroco">
+                    <label class="campo-label">
+                        Troco para quanto?
+                    </label>
+                    <input type="text" id="troco" class="campo-input" placeholder="Ex: 100,00">
+                </div>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="botoes">
+                <a href="carrinho.html" class="btn-cancelar">
+
+                    Cancelar
+
+                </a>
+                <button class="btn-prosseguir" onclick="finalizarPedido()">
+
+                    Prosseguir
+
+                </button>
+            </div>
+
+            <!-- FOOTER -->
+            <footer>
+
+                <p class="text-center">
+                    © 2026 PedidoZap. Todos os direitos reservados.
+                </p>
+
+            </footer>
+        </div>
+    </div>
+
+    <script src="js/pedido.js"></script>
+
+</body>
+
+</html>
