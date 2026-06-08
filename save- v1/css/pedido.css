@@ -1,0 +1,182 @@
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+  }
+
+  body {
+
+      min-height: 100vh;
+
+      background-image:
+          url("https://images.unsplash.com/photo-1576107232684-1279f390859f?w=1200");
+
+      background-size: cover;
+      background-position: center;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .card-pedido {
+
+      width: 390px;
+
+      background: #ececec;
+
+      border-radius: 20px;
+
+      padding: 25px;
+
+      position: relative;
+
+      box-shadow: 0 15px 30px rgba(0, 0, 0, .3);
+  }
+
+  .topo {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+  }
+
+  .logo {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      font-weight: bold;
+
+      font-size: 1.4rem;
+  }
+
+  .logo i {
+
+      color: #25D366;
+
+      font-size: 2rem;
+  }
+
+  .fechar {
+
+      font-size: 1.8rem;
+
+      cursor: pointer;
+  }
+
+  .mensagem {
+
+      background: #145a41;
+
+      color: white;
+
+      border-radius: 18px;
+
+      padding: 18px;
+
+      margin-top: 20px;
+
+      white-space: pre-line;
+
+      line-height: 1.35;
+  }
+
+  .acoes {
+
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 15px;
+  }
+
+  .btn-copiar {
+
+      flex: 1;
+
+      background: #df892d;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 18px;
+
+      padding: 10px;
+
+      font-weight: bold;
+  }
+
+  .btn-whats {
+
+      flex: 1;
+
+      background: #18d11f;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 18px;
+
+      padding: 10px;
+
+      font-weight: bold;
+  }
+
+  .feedback-btn {
+
+      width: 100%;
+
+      margin-top: 15px;
+
+      border: none;
+
+      background: #d4d4d4;
+
+      border-radius: 18px;
+
+      padding: 12px;
+
+      font-size: 1.1rem;
+  }
+
+  footer {
+
+      text-align: center;
+
+      margin-top: 18px;
+
+      font-size: .9rem;
+  }
+
+  .estrela {
+
+      cursor: pointer;
+
+      font-size: 2.5rem;
+
+      transition: .2s;
+  }
+
+  .estrela:hover {
+
+      transform: scale(1.15);
+  }
+
+  .nota-texto {
+
+      font-weight: bold;
+
+      color: #666;
+
+      margin-top: 10px;
+  }
