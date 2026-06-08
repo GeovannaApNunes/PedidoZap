@@ -1,125 +1,188 @@
-const carrinho =
-    JSON.parse(localStorage.getItem("carrinho")) || [];
+        // LISTA
+        const listaPedido =
+            document.getElementById("lista-pedido");
 
-// TROCO
-const pagamentoInputs =
-    document.querySelectorAll('input[name="pagamento"]');
+        // TOTAL
+        const totalPedido =
+            document.getElementById("total-pedido");
 
-const campoTroco =
-    document.getElementById("campoTroco");
+        // QUANTIDADE
+        const quantidadeItens =
+            document.getElementById("quantidade-itens");
 
-pagamentoInputs.forEach((input) => {
+        // PEGA CARRINHO
+        const carrinho =
+            JSON.parse(localStorage.getItem("carrinho")) || [];
 
-    input.addEventListener("change", () => {
+        // TOTAL
+        let total = 0;
 
-        if (input.value === "avista" && input.checked) {
-            campoTroco.style.display = "block";
-        } else {
-            campoTroco.style.display = "none";
+        // RENDERIZA
+        function renderPedido() {
+
+            listaPedido.innerHTML = "";
+
+            if (carrinho.length === 0) {
+
+                listaPedido.innerHTML = `
+                
+                    <div class="text-center py-4">
+
+                        <i class="bi bi-cart-x fs-1 text-muted"></i>
+
+                        <p class="mt-3">
+                            Nenhum item no pedido
+                        </p>
+
+                    </div>
+                
+                `;
+
+                return;
+
+            }
+
+            carrinho.forEach((produto) => {
+
+                total += Number(produto.preco);
+
+                listaPedido.innerHTML += `
+
+                    <div class="
+                        d-flex
+                        align-items-center
+                        justify-content-between
+                        bg-light
+                        rounded
+                        p-3
+                        mb-3
+                    ">
+
+                        <div class="d-flex align-items-center">
+
+                            <img
+                                src="${produto.imagem}"
+                                alt="${produto.nome}"
+                                style="
+                                    width: 90px;
+                                    height: 90px;
+                                    object-fit: cover;
+                                    border-radius: 10px;
+                                "
+                            >
+
+                            <div class="ms-3">
+
+                                <h6 class="fw-bold mb-1">
+                                    ${produto.nome}
+                                </h6>
+
+                                <small class="text-muted">
+                                    ${produto.categoria}
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <strong>
+                            R$ ${Number(produto.preco).toFixed(2)}
+                        </strong>
+
+                    </div>
+
+                `;
+
+            });
+
+            quantidadeItens.innerText =
+                `${carrinho.length} itens`;
+
+            totalPedido.innerHTML =
+                `Total: R$ ${total.toFixed(2)}`;
+
         }
 
-    });
+        // FINALIZAR
+        function finalizarPedido() {
 
-});
+            const nome =
+                document.getElementById("nome").value;
 
+            const cep =
+                document.getElementById("cep").value;
 
-// FINALIZAR
-function finalizarPedido() {
+            const telefone =
+                document.getElementById("telefone").value;
 
-    if (carrinho.length === 0) {
-        alert("Carrinho vazio!");
-        return;
-    }
+            const endereco =
+                document.getElementById("endereco").value;
 
-    const nome =
-        document.getElementById("nome").value || "Não informado";
+            const pagamento =
+                document.querySelector(
+                    'input[name="pagamento"]:checked'
+                );
 
-    const cep =
-        document.getElementById("cep").value || "Não informado";
+            if (
+                nome === "" ||
+                cep === "" ||
+                telefone === "" ||
+                endereco === "" ||
+                !pagamento
+            ) {
 
-    const telefone =
-        document.getElementById("telefone").value || "Não informado";
+                alert(
+                    "Preencha todas as informações."
+                );
 
-    const endereco =
-        document.getElementById("endereco").value || "Não informado";
+                return;
 
-    const troco =
-        document.getElementById("troco")?.value || "";
+            }
 
-    const pagamentoSelecionado =
-        document.querySelector('input[name="pagamento"]:checked');
+            alert("Pedido realizado com sucesso!");
 
-    if (!pagamentoSelecionado) {
-        alert("Escolha o pagamento");
-        return;
-    }
+            localStorage.removeItem("carrinho");
 
-    const data =
-        new Date().toLocaleString("pt-BR");
+            window.location.href =
+                "pagina_inicial.html";
 
-    let total = 0;
-
-    carrinho.forEach(p => {
-        total += Number(p.preco);
-    });
-
-    const pedidoFinalizado = {
-        data,
-        itens: carrinho,
-        total,
-        cliente: {
-            nome,
-            cep,
-            telefone,
-            endereco,
-            pagamento: pagamentoSelecionado.value,
-            troco: troco || null
         }
-    };
 
-    // 🔥 SALVA
-    localStorage.setItem(
-        "pedidoFinalizado",
-        JSON.stringify(pedidoFinalizado)
-    );
+        // INICIA
+        const botaoProsseguir =
+            document.getElementById("botaoProsseguir");
 
-    // limpa carrinho
-    localStorage.removeItem("carrinho");
+        if (botaoProsseguir) {
+            botaoProsseguir.addEventListener(
+                "click",
+                finalizarPedido
+            );
+        }
 
-    // vai pra página pedido
-    window.location.href = "pedido.html";
-}
+        renderPedido();
 
+        const pagamentoInputs =
+            document.querySelectorAll(
+                'input[name="pagamento"]'
+            );
 
-// render do carrinho
-function renderPedido() {
+        const campoTroco =
+            document.getElementById("campoTroco");
 
-    const lista = document.getElementById("lista-pedido");
-    const totalPedido = document.getElementById("total-pedido");
-    const quantidadeItens = document.getElementById("quantidade-itens");
+        pagamentoInputs.forEach((input) => {
 
-    lista.innerHTML = "";
+            input.addEventListener("change", () => {
 
-    let total = 0;
+                if (input.value === "avista" && input.checked) {
 
-    if (carrinho.length === 0) {
-        lista.innerHTML = "<p>Nenhum item</p>";
-        return;
-    }
+                    campoTroco.style.display = "block";
 
-    carrinho.forEach((p) => {
+                } else {
 
-        total += Number(p.preco);
+                    campoTroco.style.display = "none";
 
-        lista.innerHTML += `
-            <div>
-                ${p.nome} - R$ ${Number(p.preco).toFixed(2)}
-            </div>
-        `;
-    });
+                }
 
-    quantidadeItens.innerText = carrinho.length + " itens";
-    totalPedido.innerText = "Total: R$ " + total.toFixed(2);
-}
+            });
 
-renderPedido();
+        });

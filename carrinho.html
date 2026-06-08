@@ -29,40 +29,33 @@
         <!-- LINHA -->
         <hr class="divider">
 
-        <!-- TOTAL -->
-        <div class="d-flex justify-content-between mb-4">
-
-            <span id="item-count">
-                0 itens selecionados
-            </span>
-
-            <span id="total">
-                <strong>Total: R$ 0,00</strong>
-            </span>
-
+        <!-- RESUMO -->
+        <div class="resumo-container mb-3">
+            <div class="d-flex justify-content-between mb-2">
+                <span id="item-count">0 itens selecionados</span>
+                <strong id="total">R$ 0,00</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <span>Frete estimado</span>
+                <strong id="frete">R$ 5,00</strong>
+            </div>
+            <div class="d-flex justify-content-between total-final">
+                <span class="fw-bold">Total com frete</span>
+                <strong id="total-com-frete">R$ 5,00</strong>
+            </div>
         </div>
 
         <!-- BOTÕES -->
-        <div class="d-flex justify-content-between gap-3 flex-wrap">
-
-            <button class="btn btn-danger flex-fill" onclick="removeAll()">
-
-                Remover todos
-
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <button id="btn-remove-all" class="btn btn-remover-todos" onclick="removeAll()">
+                <i class="bi bi-trash"></i> Remover todos
             </button>
-
-            <a href="pagina_inicial.html" class="btn btn-secondary flex-fill">
-
-                Comprar mais
-
+            <a href="pagina_inicial.html" class="btn btn-comprar-mais">
+                <i class="bi bi-plus-circle"></i> Comprar mais
             </a>
-
-            <a href="formulario.html" class="btn btn-secondary flex-fill">
-
-                Proseguir para o pedido
-
+            <a href="pedido.html" id="btn-proseguir" class="btn btn-proseguir">
+                <i class="bi bi-check-circle"></i> Prosseguir
             </a>
-
         </div>
 
     </div>
@@ -79,7 +72,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="js/carrinho.js"></script>  
 
 </body>
 </html>
