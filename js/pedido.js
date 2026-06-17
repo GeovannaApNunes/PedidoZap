@@ -19,7 +19,9 @@ ITENS DO PEDIDO
 `;
 
     pedido.itens.forEach((item, i) => {
-        texto += `${i + 1}. ${item.nome} - R$ ${Number(item.preco).toFixed(2)}\n`;
+        const quantidade = item.quantidade || 1;
+        const subtotal = Number(item.preco) * quantidade;
+        texto += `${i + 1}. ${item.nome} x${quantidade} - R$ ${subtotal.toFixed(2)}\n`;
     });
 
     texto += `
@@ -60,25 +62,13 @@ function enviarWhats() {
     const texto =
         document.getElementById("mensagemPedido").innerText;
 
-    const numero = "";
+    const numero = "34997120430";
 
     // abre WhatsApp
     window.open(
         `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`,
         "_blank"
     );
-
-    // volta pro início depois de um tempo
-    setTimeout(() => {
-
-        // limpa dados do pedido (opcional)
-        localStorage.removeItem("pedidoFinalizado");
-        localStorage.removeItem("carrinho");
-
-        // volta pra home
-        window.location.href = "pagina_inicial.html";
-
-    }, 3000); // 3 segundos
 }
 
 window.onload = carregarPedido;
@@ -143,22 +133,23 @@ function enviarFeedback() {
         return;
     }
 
+    const DB_KEY = "pedidozap_db";
+
     const feedback = {
         nota: notaSelecionada,
         comentario: comentario || "",
         data: new Date().toLocaleString("pt-BR")
     };
 
-    // pega lista antiga ou cria nova
-    let lista =
-        JSON.parse(localStorage.getItem("feedbacks")) || [];
+    let db = JSON.parse(localStorage.getItem(DB_KEY)) || {
+        produtos: [],
+        pedidos: [],
+        feedbacks: []
+    };
 
-    lista.push(feedback);
+    db.feedbacks.push(feedback);
 
-    localStorage.setItem(
-        "feedbacks",
-        JSON.stringify(lista)
-    );
+    localStorage.setItem(DB_KEY, JSON.stringify(db));
 
     alert("Feedback enviado! Obrigado ❤️");
 

@@ -7,7 +7,7 @@
         const freteElement = document.getElementById("frete");
         const totalComFreteElement = document.getElementById("total-com-frete");
         const btnRemoveAll = document.getElementById("btn-remove-all");
-        const btnProsseguir = document.getElementById("btn-proseguir");
+        const btnProsseguir = document.getElementById("btn-prosseguir");
 
         // PEGA CARRINHO
         let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];

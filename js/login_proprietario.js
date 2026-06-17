@@ -220,27 +220,20 @@ if(resetSenha){
 
 
 
-// PROTEÇÃO DE ROTA
+// PROTEÇÃO DE ROTA — só redireciona se o usuário já estiver logado
+// e tentar acessar a página de login novamente
 onAuthStateChanged(auth, (user) => {
 
     const paginaAtual =
         window.location.pathname;
 
-
-
-    // SE NÃO ESTIVER LOGADO
-    if(
-
-        !user &&
-
-        paginaAtual.includes(
-            "pagina_proprietario.html"
-        )
-
-    ){
+    if (
+        user &&
+        paginaAtual.includes("login_proprietario.html")
+    ) {
 
         window.location.href =
-            "login_proprietario.html";
+            "pagina_proprietario.html";
 
     }
 

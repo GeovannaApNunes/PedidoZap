@@ -42,9 +42,14 @@
 
             }
 
+            let totalItens = 0;
+
             carrinho.forEach((produto) => {
 
-                total += Number(produto.preco);
+                const quantidade = produto.quantidade || 1;
+                const subtotal = Number(produto.preco) * quantidade;
+                total += subtotal;
+                totalItens += quantidade;
 
                 listaPedido.innerHTML += `
 
@@ -81,12 +86,16 @@
                                     ${produto.categoria}
                                 </small>
 
+                                <small class="d-block text-muted">
+                                    Qtd: ${quantidade} × R$ ${Number(produto.preco).toFixed(2)}
+                                </small>
+
                             </div>
 
                         </div>
 
                         <strong>
-                            R$ ${Number(produto.preco).toFixed(2)}
+                            R$ ${subtotal.toFixed(2)}
                         </strong>
 
                     </div>
@@ -96,7 +105,7 @@
             });
 
             quantidadeItens.innerText =
-                `${carrinho.length} itens`;
+                `${totalItens} ${totalItens === 1 ? "item" : "itens"}`;
 
             totalPedido.innerHTML =
                 `Total: R$ ${total.toFixed(2)}`;
@@ -139,12 +148,37 @@
 
             }
 
-            alert("Pedido realizado com sucesso!");
+            const troco =
+                document.getElementById("troco")
+                    ? document.getElementById("troco").value
+                    : "";
+
+            const frete = total > 0 ? 5.0 : 0.0;
+            const totalComFrete = total + frete;
+
+            const pedidoFinalizado = {
+                data: new Date().toLocaleString("pt-BR"),
+                itens: carrinho,
+                total: totalComFrete,
+                cliente: {
+                    nome,
+                    cep,
+                    telefone,
+                    endereco,
+                    pagamento: pagamento.value,
+                    troco: troco || null
+                }
+            };
+
+            localStorage.setItem(
+                "pedidoFinalizado",
+                JSON.stringify(pedidoFinalizado)
+            );
 
             localStorage.removeItem("carrinho");
 
             window.location.href =
-                "pagina_inicial.html";
+                "pedido.html";
 
         }
 

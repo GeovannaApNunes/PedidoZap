@@ -1,190 +1,162 @@
+/* ============================================================
+   CARRINHO — Mobile First
+   ============================================================ */
+
 body {
     background-color: #f5f5f5;
+    margin: 0;
 }
 
-.btn-back {
-    width: 40px;
-    height: 40px;
-    background-color: #e8e8e8;
-    border: none;
-    border-radius: 50%;
-    color: #333;
+/* Container wrapper */
+.container.py-4 {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
 }
 
+h1.fw-bold { font-size: 1.5rem; }
+
+/* ---------- ITEM DO CARRINHO ---------- */
 .cart-item {
     background-color: #e8e8e8;
     border-radius: 12px;
-    overflow: hidden;
+    padding: 10px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
+    gap: 10px;
 }
 
-.cart-item img {
-    width: 70px;
-    height: 70px;
+/* Imagem gerenciada 100% por CSS — sem inline style no JS */
+.cart-item-img {
+    width: 64px;
+    height: 64px;
     object-fit: cover;
     border-radius: 8px;
     flex-shrink: 0;
 }
 
-.cart-item .fw-bold {
-    font-size: 1rem;
-    margin-bottom: 2px;
-    color: #333;
+.cart-item-info .fw-bold {
+    font-size: 0.9rem;
+    margin-bottom: 1px;
+    color: #222;
 }
 
-.cart-item .text-muted {
+.cart-item-info .text-muted {
+    font-size: 0.85rem;
     color: #666;
-    font-size: 0.95rem;
 }
 
 .quantidade-controle button {
-    min-width: 32px;
-    padding: 0.2rem 0.5rem;
-    font-size: 1rem;
+    min-width: 30px;
+    padding: 2px 6px;
+    font-size: 0.95rem;
 }
 
+/* ---------- BOTÃO REMOVER ITEM ---------- */
 .btn-remover {
     background-color: #b01a1a;
     color: white;
     border: none;
     border-radius: 8px;
     font-weight: 700;
-    padding: 6px 14px;
-    font-size: 0.9rem;
+    padding: 5px 10px;
+    font-size: 0.82rem;
     flex-shrink: 0;
     transition: background 0.2s;
+    white-space: nowrap;
 }
+.btn-remover:hover { background-color: #8b1515; color: white; }
 
-.btn-remover:hover {
-    background-color: #8b1515;
-}
-
+/* ---------- RESUMO ---------- */
 .resumo-container {
     background-color: #fff;
     border-radius: 10px;
-    padding: 12px 16px;
+    padding: 12px 14px;
     border-left: 4px solid #ff9800;
-}
-
-.resumo-container .d-flex {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
 }
 
 .total-final {
-    font-size: 1.08rem !important;
+    font-size: 0.95rem !important;
     padding-top: 8px;
     border-top: 1px solid #e0e0e0;
 }
 
-.btn-remover-todos {
-    background-color: #b01a1a;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    min-width: 120px;
-    transition: background 0.2s;
-}
-
-.btn-remover-todos:hover {
-    background-color: #8b1515;
-}
-
-.btn-remover-todos:disabled {
-    background-color: #ccc;
-    color: #999;
-}
-
-.btn-comprar-mais {
-    background-color: #ff9800;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    min-width: 120px;
-    transition: background 0.2s;
-    text-decoration: none;
-}
-
-.btn-comprar-mais:hover {
-    background-color: #e68900;
-    color: white;
-}
-
+/* ---------- BOTÕES DE AÇÃO ---------- */
+/* Wrap em flex no HTML: d-flex flex-wrap gap-2 justify-content-center */
+.btn-remover-todos,
+.btn-comprar-mais,
 .btn-proseguir {
-    background-color: #1f9e1f;
-    color: white;
-    border: none;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 0.95rem;
-    padding: 10px 20px;
-    min-width: 120px;
-    transition: background 0.2s;
-    text-decoration: none;
-}
-
-.btn-proseguir:hover {
-    background-color: #1a7d1a;
-    color: white;
-}
-
-.btn-proseguir:disabled,
-.btn-proseguir.disabled {
-    background-color: #ccc;
-    color: #999;
-    pointer-events: none;
-}
-
-.divider {
-    border-top: 1px solid #ddd;
-    margin: 16px 0 12px 0;
-}
-
-.carrinho-vazio {
-    min-height: 220px;
-}
-
-footer {
+    font-size: 0.88rem;
+    padding: 10px 14px;
     text-align: center;
-    margin-top: 24px;
+    text-decoration: none;
+    transition: background 0.2s;
+    flex: 1 1 140px;   /* crescem, mas nunca ficam menores que 140px */
+    max-width: 100%;
 }
 
-footer p {
-    color: #888;
-    font-size: 0.85rem;
-    margin: 0;
+.btn-remover-todos { background-color: #b01a1a; color: white; border: none; }
+.btn-remover-todos:hover { background-color: #8b1515; color: white; }
+.btn-remover-todos:disabled { background-color: #ccc; color: #999; }
+
+.btn-comprar-mais { background-color: #ff9800; color: white; border: none; }
+.btn-comprar-mais:hover { background-color: #e68900; color: white; }
+
+.btn-proseguir { background-color: #1f9e1f; color: white; border: none; }
+.btn-proseguir:hover { background-color: #1a7d1a; color: white; }
+.btn-proseguir.disabled,
+.btn-proseguir:disabled { background-color: #ccc; color: #999; pointer-events: none; }
+
+/* ---------- OUTROS ---------- */
+.divider { border-top: 1px solid #ddd; margin: 14px 0 10px; }
+
+.carrinho-vazio { min-height: 180px; }
+
+footer { text-align: center; margin-top: 20px; padding-bottom: 12px; }
+footer p { color: #888; font-size: 0.82rem; margin: 0; }
+
+/* ============================================================
+   TABLET ≥ 576px
+   ============================================================ */
+@media (min-width: 576px) {
+    h1.fw-bold { font-size: 1.8rem; }
+
+    .cart-item-img { width: 72px; height: 72px; }
+
+    .resumo-container { font-size: 0.93rem; }
+
+    .btn-remover-todos,
+    .btn-comprar-mais,
+    .btn-proseguir {
+        font-size: 0.93rem;
+        flex: 0 0 auto;
+        min-width: 130px;
+    }
 }
 
-@media (max-width: 768px) {
-    .cart-item {
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 8px;
-    }
-    
-    .cart-item img {
-        width: 100%;
-        height: auto;
-        order: -1;
-        margin-bottom: 4px;
-    }
-    
-    .btn-remover-todos, .btn-comprar-mais, .btn-proseguir {
-        width: calc(50% - 6px);
-        margin-bottom: 8px;
-        min-width: unset;
+/* ============================================================
+   DESKTOP ≥ 768px
+   ============================================================ */
+@media (min-width: 768px) {
+    .container.py-4 {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
     }
 
-    .resumo-container {
-        padding: 10px 12px;
-        font-size: 0.9rem;
+    h1.fw-bold { font-size: 2rem; }
+
+    .cart-item-img { width: 70px; height: 70px; }
+
+    .btn-remover-todos,
+    .btn-comprar-mais,
+    .btn-proseguir {
+        font-size: 0.95rem;
+        padding: 10px 20px;
+        min-width: 140px;
     }
+
+    footer { margin-top: 36px; }
+    footer p { font-size: 0.85rem; }
 }
