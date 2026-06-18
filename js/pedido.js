@@ -62,7 +62,7 @@ function enviarWhats() {
     const texto =
         document.getElementById("mensagemPedido").innerText;
 
-    const numero = "34997120430";
+    const numero = "";
 
     // abre WhatsApp
     window.open(
